@@ -1,15 +1,19 @@
 ﻿using System.IO;
 using System.Net.Mail;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
+using Pdbc.Mailing.RazorEngine;
 using Pdbc.Mailing.RazorEngine.Templates;
 using Pdbc.Mailing.RazorEngine.Models;
 using Pdbc.Mailing.Sample.Models;
+using Pdbc.Mailing.Tests.Screenshots;
 
 namespace Pdbc.Mailing.Tests
 {
-    public class BaseMailTestFixture 
+    public class BaseMailTestFixture
     {
-        protected IMailGenerationService MailEngineService; // => Container.Resolve<IMailGenerationService>();
+        
 
         private string SaveEmailAsHtmlToScreenshotfolder(string mailBody, string filename)
         {
@@ -32,22 +36,18 @@ namespace Pdbc.Mailing.Tests
             return mailFileName;
         }
 
-        [Test]
-        public void Verify_template()
+        private IConfiguration LoadConfiguration()
         {
-            //// SETUP
-            //var viewmodel = new InvitationViewModelTestDataBuilder()
-            //    .WithApplicationScope("ApplicationScopeName")
-            //    .Build();
-            //var mailInfo = new MailInfoTestDataBuilder()
-            //    .WithTemplateName(MailTemplates.InvitationForSingleApplicationPortal)
-            //    .WithTemplateLanguageCode(language)
-            //    .WithSubject(MailTemplateSubjectResolver.GetSubjectFor(MailTemplates.InvitationForSingleApplicationPortal, language).FormatWith(viewmodel.AccountOfficialName));
-            //viewmodel.MailInfo = mailInfo;
-            ////viewmodel = new InvitationViewModelTestDataBuilder().WithMailInfo(mailInfo).Build();
+            var configurationBuilder = new ConfigurationBuilder();
+            configurationBuilder
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
 
-            //string mailName = null;
-            //string language = null;
+            return configurationBuilder.Build();
+
+        }
+        [Test]
+        public void Verify_template_generation_mail_one()
+        {
             MailOneViewModel viewmodel = new MailOneViewModel();
             viewmodel.MailTitle = "Some title to add";
             viewmodel.MailCommunicationInfo = new MailCommunicationInfo()
@@ -64,13 +64,33 @@ namespace Pdbc.Mailing.Tests
                 TemplateName = "MailOne"
             };
 
+            var configuration = LoadConfiguration();
+
+            var services = new ServiceCollection();
+            services.AddSingleton(configuration);
+
+
+            services.AddSingleton<ITemplateFileLoader, TemplateFileLoader>();
+            services.AddSingleton<IMailTemplateCacheService, MailTemplateCacheService>();
+            services.AddScoped<IMailGenerationService, MailGenerationService>();
+            services.AddScoped<IMailTemplateConfiguration, MailTemplateConfiguration>();
+            services.AddScoped<RazorEngineCore.RazorEngine>();
+
+            var serviceProvider = services.BuildServiceProvider();
+
+            IMailGenerationService MailEngineService = serviceProvider.GetRequiredService<IMailGenerationService>(); // => Container.Resolve<IMailGenerationService>();
+
             var mailBody = MailEngineService.GenerateHtmlMail(viewmodel);
 
-            //var mailPath = SaveEmailAsHtmlToScreenshotfolder(mailBody, GetMailNamefor(mailName, language));
+            var mailPath = SaveEmailAsHtmlToScreenshotfolder(mailBody, GetMailNamefor(viewmodel.MailTemplateInfo.TemplateName, viewmodel.MailTemplateInfo.TemplateLanguageCode));
 
-            //NavigateToPage(mailPath).TakeScreenshot(GetScreenshotNameFor(mailName));
-            // Move + Rename screenshots to folder
-            //MoveScreenshotsToDocumentationFolder(language);
+            var webDriverConfiguration = new WebDriverConfiguration(configuration);
+            var webdriver = WebDriverFactory.SetupWebDriver(webDriverConfiguration);
+            webdriver.Navigate().GoToUrl(mailPath);
+            webdriver.TakeScreenshot(webDriverConfiguration.ScreenShotDirectory);
+
+            webdriver.Quit();
+            webdriver.Dispose();
         }
 
 

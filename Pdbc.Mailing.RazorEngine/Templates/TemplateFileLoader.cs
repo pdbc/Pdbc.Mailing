@@ -133,7 +133,6 @@ namespace Pdbc.Mailing.RazorEngine.Templates
             parts.Add("footer", FindLayoutPartFor("footer", languageCode));
             parts.Add("greeting", FindLayoutPartFor("greeting", languageCode));
             parts.Add("header", FindLayoutPartFor("header", languageCode));
-            parts.Add("headerForApplicationScope", FindLayoutPartFor("headerForApplicationScope", languageCode));
             parts.Add("horizontal-divider", FindLayoutPartFor("horizontal-divider", languageCode));
             parts.Add("layout", FindLayoutPartFor("layout", languageCode));
             parts.Add("stylesheet", FindLayoutPartFor("stylesheet", languageCode));

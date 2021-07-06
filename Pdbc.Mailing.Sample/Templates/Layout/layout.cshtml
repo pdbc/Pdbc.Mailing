@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>@Model.MailInfo.Subject</title>
+    <title>@Model.MailCommunicationInfo.Subject</title>
 
     @Include("stylesheet", Model)
 </head>
@@ -29,7 +29,7 @@
                                                 <td>
                                                     @RenderBody()
                                                     
-                                                    @Include("greeting", @Model.MailInfo.TemplateLanguageCode)
+                                                    @Include("greeting", @Model.MailTemplateInfo.TemplateLanguageCode)
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -46,7 +46,7 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    @Include("footer", @Model.MailInfo.TemplateLanguageCode)
+                                    @Include("footer", @Model.MailTemplateInfo.TemplateLanguageCode)
                                 </td>
                             </tr>
                         </tbody>
