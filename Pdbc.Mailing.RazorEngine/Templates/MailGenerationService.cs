@@ -21,7 +21,7 @@ namespace Pdbc.Mailing.RazorEngine.Templates
         public String GenerateHtmlMail(IMailViewModel mailViewModel)
         {
             // Retrieve the template
-            var compiledTemplate = _mailTemplateCacheService.GetHtmlTemplate(mailViewModel.MailInfo.TemplateName, mailViewModel.MailInfo.TemplateLanguageCode);
+            var compiledTemplate = _mailTemplateCacheService.GetHtmlTemplate(mailViewModel.MailTemplateInfo.TemplateName, mailViewModel.MailTemplateInfo.TemplateLanguageCode);
             var result = compiledTemplate.Run(mailViewModel);
             return result;
         }
@@ -29,7 +29,7 @@ namespace Pdbc.Mailing.RazorEngine.Templates
         public String GenerateTextOnlyMail(IMailViewModel mailViewModel)
         {
             // Retrieve the template
-            var compiledTemplate = _mailTemplateCacheService.GetTextOnlyTemplate(mailViewModel.MailInfo.TemplateName, mailViewModel.MailInfo.TemplateLanguageCode);
+            var compiledTemplate = _mailTemplateCacheService.GetTextOnlyTemplate(mailViewModel.MailTemplateInfo.TemplateName, mailViewModel.MailTemplateInfo.TemplateLanguageCode);
 
             var result = compiledTemplate?.Run(mailViewModel);
             return result;

@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.31112.23
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pdbc.Mailing.RazorEngine", "Pdbc.Mailing.RazorEngine\Pdbc.Mailing.RazorEngine.csproj", "{0B7013B0-5117-463D-9549-D9490CE85E8F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pdbc.Mailing.Tests", "Pdbc.Mailing.Tests\Pdbc.Mailing.Tests.csproj", "{1B523D74-F480-4208-BB2B-BDFED57C8C2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pdbc.Mailing.Sample", "Pdbc.Mailing.Sample\Pdbc.Mailing.Sample.csproj", "{511CD98D-5F41-4304-98A4-390C7C0E9A76}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{0B7013B0-5117-463D-9549-D9490CE85E8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B7013B0-5117-463D-9549-D9490CE85E8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B7013B0-5117-463D-9549-D9490CE85E8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B523D74-F480-4208-BB2B-BDFED57C8C2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B523D74-F480-4208-BB2B-BDFED57C8C2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B523D74-F480-4208-BB2B-BDFED57C8C2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B523D74-F480-4208-BB2B-BDFED57C8C2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{511CD98D-5F41-4304-98A4-390C7C0E9A76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{511CD98D-5F41-4304-98A4-390C7C0E9A76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{511CD98D-5F41-4304-98A4-390C7C0E9A76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{511CD98D-5F41-4304-98A4-390C7C0E9A76}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

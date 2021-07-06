@@ -2,7 +2,9 @@
 {
     public interface IMailViewModel
     {
-        MailInfo MailInfo { get; set; }
-        
+        MailTemplateInfo MailTemplateInfo { get; set; }
+
+        MailCommunicationInfo MailCommunicationInfo { get; set; }
+
     }
 }

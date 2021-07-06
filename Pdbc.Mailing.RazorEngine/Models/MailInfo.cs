@@ -3,7 +3,7 @@ using System.Net.Mail;
 
 namespace Pdbc.Mailing.RazorEngine.Models
 {
-    public class MailInfo
+    public class MailTemplateInfo
     {
         // Template
         public String TemplateName { get; set; }
@@ -17,7 +17,10 @@ namespace Pdbc.Mailing.RazorEngine.Models
         {
             return $"{TemplateName}_{defaultLanguage}";
         }
+    }
 
+    public class MailCommunicationInfo
+    {
         // Mail
         public string ToEmailAddress { get; set; }
 
